@@ -10,6 +10,16 @@ This script helps you create playlists of similar songs based on a given song.
 - Play the Playlist songs.
 - Provides a playlist name .
 
+**Requirements:**
+
+- `ollama` in https://ollama.com/
+	Install Linux
+	curl -fsSL https://ollama.com/install.sh | sh
+	
+- `ytfzf` command-line tool in https://github.com/pystardust/ytfzf
+	install Linux 
+	sudo apt get install ytfzf
+
 ## Installation
 
 Clone the repository:
@@ -45,17 +55,6 @@ Now you can run the script with:
 ```bash
 ai_playlist -n 10 -m llama3 "Spain - Chick Corea"
 ```
-
-**Requirements:**
-
-- `ollama` in https://ollama.com/
-	Install Linux
-	curl -fsSL https://ollama.com/install.sh | sh
-	
-- `ytfzf` command-line tool in https://github.com/pystardust/ytfzf
-	install Linux 
-	sudo apt get install ytfzf
-
 
 **Features:**
 
