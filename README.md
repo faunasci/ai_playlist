@@ -51,6 +51,7 @@ Now you can run the script with:
 ```bash
 ./ai_playlist [options]
 ```
+Type 'q' for change music and 2x 'q' for Quit loop.
 
 **Options:**
 
