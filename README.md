@@ -48,6 +48,13 @@ Now you can run the script with:
 
 **Usage:** 
 
+start the server:
+
+```bash
+./ollama serve
+```
+Finally, in a separate shell
+
 ```bash
 ./ai_playlist [options]
 ```
