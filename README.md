@@ -44,11 +44,11 @@ Now you can run the script with:
 
 **Options:**
 
-- -h (Show this Help)
-- -n (number of music in the playlist), default 10
-- -m (name model Ollama), default llama3
-- -v (With Video), default No Video 
-- -r (Choice Random Music,Artist) default No Random
+- -h  (Show this Help)
+- -n  (number of music in the playlist), default 10
+- -m  (name model Ollama), default llama3
+- -v  (With Video), default No Video 
+- -r  (Choice Random Music,Artist) default No Random
 
 **Example:**
 
