@@ -64,7 +64,7 @@ gen_playlist() {
 play_playlist() {
 	for i in $(seq 1 $(cat /tmp/playlist_${seed} | grep "^[0-9]" | cut -d"." -f 2 | wc -l)); do
 		read -n 1 -t 1 key
-		[[ $key == "q" ]] && exit
+		[[ $key == "q" ]] && echo -e "\r" && exit
 		cat /tmp/playlist_${seed} | grep "^[0-9]" | cut -d"." -f 2 | sed -n "$i p"
 		echo ""
 		line
