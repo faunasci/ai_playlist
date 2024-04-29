@@ -1,6 +1,6 @@
 ## README.md
 
-### Ai Generate Playlist
+### Ai Playlist
 
 This script helps you create playlists of similar songs based on a given song. 
 
