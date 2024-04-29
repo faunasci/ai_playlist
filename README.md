@@ -15,14 +15,16 @@ https://github.com/faunasci/ai_playlist/assets/168428584/b6815364-8169-43aa-88f9
 **Requirements:**
 
 - `ollama` in https://ollama.com/
-	Install Linux
+
+  	*Install Linux*
 
 	```bash
 	curl -fsSL https://ollama.com/install.sh | sh
 	```
  
 - `ytfzf` command-line tool in https://github.com/pystardust/ytfzf
-	install Linux
+
+	*install Linux*
 
 	```bash
  	sudo apt get install ytfzf
