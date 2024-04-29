@@ -1,0 +1,120 @@
+#!/usr/bin/env bash
+
+while getopts "m:n:vrh" opt; do
+	case $opt in
+	m) model=${OPTARG} ;;
+	n) number_list=${OPTARG} ;;
+	v) video="1" ;;
+	r) random_choice="1" ;;
+	h) HELP="1" ;;
+	esac
+done
+
+# Initialize variables and options
+seed=$(shuf -i 1-9999 -n 1)
+number_list=${number_list:-"10"}
+model=${model:-"llama3"}
+dark_color="\033[2;37m"
+red_color="\033[0;31m"
+blue_color="\033[0;34m"
+no_color="\033[0m"
+texto="""I want you to act as a song recommender,original not the most iconic and influential. I will provide you with a song and you will create a playlist of ${number_list} 
+songs that are similar to the given song. And you will provide a playlist name for the playlist. 
+Do not choose songs that are same name or artist. Do not write any explanations or other words, just reply with the playlist name and the songs. My first song is """
+
+# Define functions for output formatting and error handling
+line() {
+	echo -ne "${dark_color}"
+	nb=$(stty size | cut -d' ' -f2)
+    line=$(printf "%0.s─" $(seq 1 $nb))
+	echo -ne "${line}${no_color}\n"
+}
+
+handle_error() {
+	printf "Error: %s\n" "$1"
+	exit 1
+}
+
+help() {
+	echo -e """Usage: ai_playlist [options]\n
+-h (Show this Help)
+-n (number of music in the playlist), default 10
+-m (name model Ollama), default llama3
+-v (With Video), default No Video 
+-r (Choice Random Music,Artist) default No Random\n"""
+	exit 0
+}
+
+intro() {
+	clear -x
+	line
+	echo -e "${red_color}Ai Playlist${no_color}\n"
+	line
+	echo -e """${blue_color}Model  Name = ${model}
+Number List = ${number_list}${no_color}\n"""
+	line
+}
+
+gen_playlist() {
+	line
+	ollama run "${model}" "${prompt}" | tee /tmp/playlist_$seed
+	line
+}
+
+play_playlist() {
+	for i in $(seq 1 $(cat /tmp/playlist_${seed} | grep "^[0-9]" | cut -d"." -f 2 | wc -l)); do
+		read -n 1 -t 1 key
+		[[ $key == "q" ]] && exit
+		cat /tmp/playlist_${seed} | grep "^[0-9]" | cut -d"." -f 2 | sed -n "$i p"
+		echo ""
+		line
+		if [[ -n $video ]]; then
+			ytfzf -a $(cat /tmp/playlist_${seed} | grep "^[0-9]" | sed 's/^[0-9]\. //g' | sed -n "$i p") 2>/dev/null
+		else
+			ytfzf -m -a $(cat /tmp/playlist_${seed} | grep "^[0-9]" | sed 's/^[0-9]\. //g' | sed -n "$i p")
+		fi
+		line
+	done
+	unset video
+}
+
+random() {
+	intro
+	rn=$(shuf -i 1-9 -n 1)
+	prompt="$texto $(cat ~/.historic_playlist | sed -n "$rn p")"
+	echo -e "\n$(cat ~/.historic_playlist | sed -n "$rn p")\n"
+	gen_playlist &&
+		play_playlist
+	unset RANDOM
+}
+
+prompt() {
+	read -e -p "Music name and Artist >> " txt
+	if [[ $txt == "h" ]]; then
+		echo ""
+		for i in $(seq 1 $(cat ~/.historic_playlist | wc -l)); do
+			echo "$i - $(cat ~/.historic_playlist | sed -n "$i p")"
+		done
+		echo -ne "\nChoice number: "
+		read NB
+		echo ""
+		prompt="$texto $(cat ~/.historic_playlist | sed -n "$NB p")"
+		cat ~/.historic_playlist | sed -n "$NB p"
+	else
+		echo $txt >>~/.historic_playlist
+		prompt="$texto $txt "
+	fi
+}
+
+if [[ -n $HELP ]]; then help && exit; fi
+
+if [[ -n $random_choice ]]; then
+	random
+else
+	intro
+	prompt
+	gen_playlist &&
+		play_playlist
+fi
+
+exit
