@@ -2,7 +2,7 @@
 
 ### Ai Playlist
 
-This script helps you create playlists of similar songs based on a given song. 
+This script Ai create playlists of similar songs based on a given song, using Ollama and play in youtube using ytfzf. 
 
 https://github.com/faunasci/ai_playlist/assets/168428584/b6815364-8169-43aa-88f9-10023f4c12a3
 
