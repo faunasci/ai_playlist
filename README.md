@@ -4,8 +4,7 @@
 
 This script helps you create playlists of similar songs based on a given song. 
 
-![me](https://github.com/faunasci/ai_playlist/blob/main/tty.gif)
-
+<img src="./assets/tty.gif"/>
 **Purpose:**
 
 - Creates a playlist with the recommended songs.
