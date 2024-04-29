@@ -53,7 +53,7 @@ start the server:
 ```bash
 ./ollama serve
 ```
-Finally, in a separate shell
+Finally, in a separate shell:
 
 ```bash
 ./ai_playlist [options]
