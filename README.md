@@ -45,7 +45,7 @@ chmod +x ai_playlist
 
 Now you can run the script with:
 
-**Usage:** 
+## Usage
 
 start the server:
 
@@ -57,7 +57,9 @@ Finally, in a separate shell:
 ```bash
 ./ai_playlist [options]
 ```
-Type 'q' for change music and 2x 'q' for Quit loop.
+Type 'q' for change music. 
+
+Type 2x 'q' for Quit loop.
 
 **Options:**
 
@@ -72,18 +74,11 @@ Type 'q' for change music and 2x 'q' for Quit loop.
 ```bash
 ai_playlist -n 10 -m llama3 "Spain - Chick Corea"
 ```
-
-**Features:**
-
-- Handles historic playlists.
-- Provides option to choose a previously created playlist.
-- Uses Ollama AI model for song recommendations.
-
 **Known Issues:**
 
 - The Name of song may not always the good songs. Depend of Model.
 
 **Contact:**
 
-If you have any questions or suggestions, please feel free to contact the developer at [email protected]
+If you have any questions or suggestions, please feel free to contact the developer.
 
